@@ -66,15 +66,35 @@ body{
   align-items: center;
   letter-spacing: 3px;
   font-weight: 600;
+  cursor: pointer;
 }
+#exchangeButton:hover{
+  background-color: green;
+  color: white;
+  border: none;
+  transition: 0.4s;
+}
+
 .selectionsSection{
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
- 
+  align-items: center;
 }
 .select{
   width: 40%;
   height: 35px;
   padding-left: 7px;
+}
+#moneyconversion{
+  width: 11%;
+  height: auto;
+}
+.resultSection{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgb(232, 222, 207);
+  height: 40px;
 }

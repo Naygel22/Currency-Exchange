@@ -3,6 +3,8 @@ showCurrencyExchange();
 
 let firstCurrency = "";
 let secondCurrency = "";
+let amountValue = 1;
+let convertedResult;
 
 async function showCurrencyExchange(){
   const url = 'https://currency-exchange.p.rapidapi.com/listquotes';
@@ -26,7 +28,7 @@ const options = {
 }
 
 async function convertCurrencies(){
-  const url = `https://currency-exchange.p.rapidapi.com/exchange?from=${firstCurrency}&to=${secondCurrency}&q=1.0`;
+  const url = `https://currency-exchange.p.rapidapi.com/exchange?from=${firstCurrency}&to=${secondCurrency}&q=${amountValue}`;
 const options = {
 	method: 'GET',
 	headers: {
@@ -39,6 +41,7 @@ try {
 	const response = await fetch(url, options);
 	const result = await response.json();
 	console.log(result);
+  return result;
 } catch (error) {
 	console.error(error);
 }
@@ -79,14 +82,19 @@ function createToConvertSelect(arrayAPI){
 }
 
 const exchangeButton = document.querySelector('#exchangeButton');
-  exchangeButton.addEventListener('click', function () {
-    const result = convertCurrencies();
-    resultOfConvertion.textContent = result;
+  exchangeButton.addEventListener('click', async function () {
+    const result = await convertCurrencies();
+    convertedResult = (result * amountValue).toFixed(2);
+    resultOfConvertion.innerHTML = `${amountValue} ${firstCurrency} = <strong>${convertedResult} ${secondCurrency}</strong>`;
     return result;
   });
 
 const resultOfConvertion = document.querySelector('#resultOfConvertion');
+const inputNubmerAmount = document.querySelector('#amount');
 
+inputNubmerAmount.addEventListener('input', function(){
+  amountValue = inputNubmerAmount.value;
+})
 
 
 
